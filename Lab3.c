@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int main(int argc, char *argv[]) {
-	const int COUNT_SYMBOL = 80;
+	const int COUNT_SYMBOL = 81;
 	int i = 0;
 	char str[COUNT_SYMBOL];
 	
