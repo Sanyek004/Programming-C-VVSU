@@ -94,10 +94,11 @@ int main(int argc, char *argv[]) {
 		}
 		else
 		{
-			printf("This is symbol not supported!");
+			printf("This is symbol not supported! Exiting...");
+			break;
 		}
 
-	} while(input != '+' && input != '-' && input != '*');
+	} while(input != '+' || input != '-' || input != '*');
 	
 	free(arr_1);
 	free(arr_2);
