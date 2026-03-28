@@ -62,6 +62,19 @@ int main(int argc, char *argv[]) {
 				}
 			}
 		}
+		else if (input == '-')
+		{
+			printf("Operation '-'\n");
+			for (int i = 0; i < N; i++)
+			{
+				for (int j = 0; j < N; j++)
+				{
+					arr_res[i * N + j] = arr_1[i * N + j] - arr_2[i * N + j];
+					
+					printf("%f\t", arr_res[i * N + j]);					
+				}
+			}
+		}
 
 	} while(input != '+' && input != '-' && input != '*');
 	
