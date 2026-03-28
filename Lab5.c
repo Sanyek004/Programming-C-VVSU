@@ -44,7 +44,6 @@ int main(int argc, char *argv[]) {
 	char input = ' ';
 	double *arr_res = malloc(N * N * sizeof(double));
 	
-	
 	do
 	{
 		printf("Add operation such as +,-,*\n");
@@ -56,9 +55,10 @@ int main(int argc, char *argv[]) {
 			{
 				for (int j = 0; j < N; j++)
 				{
-					arr_res[i * N + j] = arr_1[i * N + j] + arr_2[i * N + j];
+					int index = i * N + j;
+					arr_res[index] = arr_1[index] + arr_2[index];
 					
-					printf("%f\t", arr_res[i * N + j]);					
+					printf("%f\t", arr_res[index]);					
 				}
 			}
 		}
@@ -69,11 +69,32 @@ int main(int argc, char *argv[]) {
 			{
 				for (int j = 0; j < N; j++)
 				{
-					arr_res[i * N + j] = arr_1[i * N + j] - arr_2[i * N + j];
+					int index = i * N + j;
+					arr_res[index] = arr_1[index] - arr_2[index];
 					
-					printf("%f\t", arr_res[i * N + j]);					
+					printf("%f\t", arr_res[index]);					
 				}
 			}
+		}
+		else if (input == '*')
+		{
+			
+			printf("Operation '-'\n");
+			for (int i = 0; i < N; i++)
+			{
+				for (int j = 0; j < N; j++)
+				{
+					int index = i * N + j;
+					arr_res[index] = arr_1[index] + arr_2[index];
+					
+					printf("%f\t", arr_res[index]);					
+				}
+			}
+			
+		}
+		else
+		{
+			printf("This is symbol not supported!");
 		}
 
 	} while(input != '+' && input != '-' && input != '*');
