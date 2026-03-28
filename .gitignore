@@ -1,19 +1,7 @@
 *.o
-*.obj
-*.a
-*.lib
-*.so
-*.dll
-*.dylib
 
-*.exe
 *.out
-*.app
+a.out
 
-.vscode/
-.idea/
-
-*.log
-*.dSYM/
-*.pdb
-*.ilk
+Lab[0-16]
+Lab.[0-16]
