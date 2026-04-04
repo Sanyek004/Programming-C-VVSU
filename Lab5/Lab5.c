@@ -8,10 +8,10 @@ int main(int argc, char *argv[]) {
 	printf("Task 5\n");
 	int N = 2;
 	
-	// Выделение памяти через нашу функцию
-    double *arr_1 = allocate_matrix(N);
-    double *arr_2 = allocate_matrix(N);
-    double *arr_res = allocate_matrix(N);
+	// Выделение памяти через функции
+    double **arr_1 = allocate_matrix(N);
+    double **arr_2 = allocate_matrix(N);
+    double **arr_res = allocate_matrix(N);
     
     // Заполнение матриц
     fill_matrix(arr_1, N, "array_1");
