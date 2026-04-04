@@ -1,108 +1,56 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "matrix.h"
 
 int main(int argc, char *argv[]) {
 	
 	printf("Task 5\n");
-	int N=2;
+	int N = 2;
 	
-	double *arr_1 = malloc(N * N * sizeof(double));
-	double *arr_2 = malloc(N * N * sizeof(double));
-	
-	
-	if (arr_1 == NULL)
-	{
-		printf("Memory is not located!!!");
-		return -1;
-	}
-	
-	if (arr_2 == NULL)
-	{
-		printf("Memory is not located!!!");
-		return -1;
-	}
-	
-	for (int i = 0; i < N; i++)
-	{
-		for (int j = 0; j < N; j++)
-		{
-			printf("Add number array_1:\n");
-			scanf("%lf", &arr_1[i * N + j]);
-		}
-	}
-	
-	for (int i = 0; i < N; i++)
-	{
-		for (int j = 0; j < N; j++)
-		{
-			printf("Add number array_2:\n");
-			scanf("%lf", &arr_2[i * N + j]);
-		}
-	}
-	
+	// Выделение памяти через нашу функцию
+    double *arr_1 = allocate_matrix(N);
+    double *arr_2 = allocate_matrix(N);
+    double *arr_res = allocate_matrix(N);
+    
+    // Заполнение матриц
+    fill_matrix(arr_1, N, "array_1");
+    fill_matrix(arr_2, N, "array_2");
+		
 	char input = ' ';
-	double *arr_res = malloc(N * N * sizeof(double));
+	int keep_running = 1;
 	
-	do
+	while(keep_running)
 	{
 		printf("Add operation such as +,-,*\n");
 		scanf(" %c", &input);
 		if (input == '+')
 		{
-			printf("Operation '+'\n");
-			for (int i = 0; i < N; i++)
-			{
-				for (int j = 0; j < N; j++)
-				{
-					int index = i * N + j;
-					arr_res[index] = arr_1[index] + arr_2[index];
-					
-					printf("%f\t", arr_res[index]);					
-				}
-			}
+			add_matrices(arr_1, arr_2, arr_res, N);
+            print_matrix(arr_res, N);
 		}
 		else if (input == '-')
 		{
-			printf("Operation '-'\n");
-			for (int i = 0; i < N; i++)
-			{
-				for (int j = 0; j < N; j++)
-				{
-					int index = i * N + j;
-					arr_res[index] = arr_1[index] - arr_2[index];
-					
-					printf("%f\t", arr_res[index]);					
-				}
-			}
+			sub_matrices(arr_1, arr_2, arr_res, N);
+            print_matrix(arr_res, N);
 		}
 		else if (input == '*')
 		{
-			
-			printf("Operation '-'\n");
-			for (int i = 0; i < N; i++)
-			{
-				for (int j = 0; j < N; j++)
-				{
-					int index = i * N + j;
-					arr_res[index] = arr_1[index] + arr_2[index];
-					
-					printf("%f\t", arr_res[index]);					
-				}
-			}
-			
+			multiply_matrices(arr_1, arr_2, arr_res, N);
+            print_matrix(arr_res, N);
 		}
 		else
 		{
-			printf("This is symbol not supported! Exiting...");
-			break;
+			printf("This is symbol not supported! Exiting...\n");
+			keep_running = 0;
 		}
 
-	} while(input != '+' || input != '-' || input != '*');
+	} 
 	
-	free(arr_1);
-	free(arr_2);
-	free(arr_res);
+	// Очистка памяти
+    free_matrix(arr_1);
+    free_matrix(arr_2);
+    free_matrix(arr_res);
 	
 	return 0;
 }
