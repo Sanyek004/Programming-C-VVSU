@@ -47,7 +47,8 @@ void print_matrix(double **mat, int n) {
     }
 }
 
-void add_matrices(double **a, double **b, double **res, int n) {
+double** add_matrices(double **a, double **b, int n) {
+	double **res = allocate_matrix(n);
     for (int i = 0; i < n; i++) 
     {
 		for (int j = 0; j < n; j++)
@@ -55,9 +56,12 @@ void add_matrices(double **a, double **b, double **res, int n) {
 			res[i][j] = a[i][j] + b[i][j];
 		}
     }
+    
+    return res;
 }
 
-void sub_matrices(double **a, double **b, double **res, int n) {
+double** sub_matrices(double **a, double **b, int n) {
+    double **res = allocate_matrix(n);
     for (int i = 0; i < n; i++) 
     {
 		for (int j = 0; j < n; j++)
@@ -65,18 +69,24 @@ void sub_matrices(double **a, double **b, double **res, int n) {
 			res[i][j] = a[i][j] - b[i][j];
 		}
     }
+    
+    return res;
 }
 
-void multiply_matrices(double **a, double **b, double **res, int n) {
-for (int i = 0; i < n; i++) 
-{
-	for (int j = 0; j < n; j++)
+double** multiply_matrices(double **a, double **b, int n) {
+	double **res = allocate_matrix(n);
+	
+	for (int i = 0; i < n; i++) 
 	{
-        res[i][j] = 0;
-        for (int k = 0; k < n; k++) 
+		for (int j = 0; j < n; j++)
 		{
-			res[i][j] += a[i][k] * b[k][j];
+			res[i][j] = 0;
+			for (int k = 0; k < n; k++) 
+			{
+				res[i][j] += a[i][k] * b[k][j];
+			}
 		}
     }
-    }
+    
+    return res;
 }

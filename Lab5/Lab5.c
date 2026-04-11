@@ -26,17 +26,17 @@ int main(int argc, char *argv[]) {
 		scanf(" %c", &input);
 		if (input == '+')
 		{
-			add_matrices(arr_1, arr_2, arr_res, N);
+			arr_res = add_matrices(arr_1, arr_2, N);
             print_matrix(arr_res, N);
 		}
 		else if (input == '-')
 		{
-			sub_matrices(arr_1, arr_2, arr_res, N);
+			arr_res = sub_matrices(arr_1, arr_2, N);
             print_matrix(arr_res, N);
 		}
 		else if (input == '*')
 		{
-			multiply_matrices(arr_1, arr_2, arr_res, N);
+			arr_res = multiply_matrices(arr_1, arr_2, N);
             print_matrix(arr_res, N);
 		}
 		else

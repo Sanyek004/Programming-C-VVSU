@@ -10,8 +10,8 @@ void fill_matrix(double **mat, int n, const char *matrix_name);
 void print_matrix(double **mat, int n);
 
 // Математические операции
-void add_matrices(double **a, double **b, double **res, int n);
-void sub_matrices(double **a, double **b, double **res, int n);
-void multiply_matrices(double **a, double **b, double **res, int n);
+double** add_matrices(double **a, double **b, int n);
+double** sub_matrices(double **a, double **b, int n);
+double** multiply_matrices(double **a, double **b, int n);
 
 #endif // MATRIX_H
