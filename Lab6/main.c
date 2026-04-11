@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 int main ()
 {
@@ -13,25 +14,23 @@ int main ()
 		return -1;
 	}
 	
+	char words[100];
 	int after = 1980;
-	char buffer_num[12];
-	sprintf(buffer_num, "%d", after);
 	
-	char buffer[1000];
-	size_t n = fread(buffer,1,sizeof(buffer) - 1, open_file);
-	buffer[n] = '\0';
-	
-	char *found = strstr(buffer,buffer_num);
-	
-	if (found)
-	{	
-		char *after_num = found + strlen(buffer_num);
-		printf("Найдено: %s\n",after_num);
-	}
-	else
+	while (fgets(words,sizeof(words),open_file) != NULL)
 	{
-		printf("Не найдено\n");
+		int value;
+		
+		if (sscanf(words, "%*[^0-9]%d", &value) == 1 || sscanf(words, "%d", &value) == 1)
+		{
+			if (value >= after)
+			{
+				printf("Founded: %s\n", words);	
+			}
+		}
 	}
+	
+	fclose(open_file);
 	
 	return 0;
 }
