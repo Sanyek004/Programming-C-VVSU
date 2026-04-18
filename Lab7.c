@@ -27,16 +27,6 @@ int main()
 		scanf("%i",&array_1[i].year);
 	}
 	
-	
-	printf("Array 1\n");
-	for (int i = 0; i < N; i++)
-	{
-		printf("%d: ", i);
-		printf("Name: %s\n\n", array_1[i].name);
-		printf("Surname: %s\n\n", array_1[i].surname);
-		printf("Year born: %d\n\n", array_1[i].year);
-	}
-	
 	printf("\n");
 	
 	printf("Add personal data:");
@@ -49,6 +39,43 @@ int main()
 		scanf("%i",&array_2[i].year);
 	}
 	
+	for (int i = 0; i < N - 1; i++)
+	{
+		for (int j = 0; j < N - 1 - i; j++)
+		{
+			if (array_1[j].year > array_1[j+1].year)
+			{
+				HUMAN temp = array_1[j];
+				array_1[j] = array_1[j+1];
+				array_1[j+1] = temp;
+			}
+		}
+	}
+	
+	for (int i = 0; i < N - 1; i++)
+	{
+		for (int j = 0; j < N - 1 - i; j++)
+		{
+			if (array_2[j].year > array_2[j+1].year)
+			{
+				HUMAN temp = array_2[j];
+				array_2[j] = array_2[j+1];
+				array_2[j+1] = temp;
+			}
+		}
+	}
+	
+	printf("Array 1\n");
+	for (int i = 0; i < N; i++)
+	{
+		printf("%d: ", i);
+		printf("Name: %s\n\n", array_1[i].name);
+		printf("Surname: %s\n\n", array_1[i].surname);
+		printf("Year born: %d\n\n", array_1[i].year);
+	}
+	
+	printf("\n\n");
+	
 	printf("Array 2\n");
 	for (int i = 0; i < N; i++)
 	{
@@ -57,7 +84,6 @@ int main()
 		printf("Surname: %s\n\n", array_2[i].surname);
 		printf("Year born: %d\n\n", array_2[i].year);
 	}
-	
 	
 	return 0;
 }
