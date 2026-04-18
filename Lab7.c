@@ -11,7 +11,6 @@ typedef struct human {
 
 int main()
 {
-	//char s;
 	int N = 4;
 	
 	HUMAN array_1[N];
@@ -29,27 +28,10 @@ int main()
 	
 	printf("\n");
 	
-	printf("Add personal data:");
-	printf(" ARRAY_2\n");
+	// Копирование из первого массива во второй 
 	for (int i = 0; i < N; i++)
 	{
-		printf("%d) ",i);
-		scanf(" %s",array_2[i].name);
-		scanf(" %s",array_2[i].surname);
-		scanf("%i",&array_2[i].year);
-	}
-	
-	for (int i = 0; i < N - 1; i++)
-	{
-		for (int j = 0; j < N - 1 - i; j++)
-		{
-			if (array_1[j].year > array_1[j+1].year)
-			{
-				HUMAN temp = array_1[j];
-				array_1[j] = array_1[j+1];
-				array_1[j+1] = temp;
-			}
-		}
+		array_2[i] = array_1[i]; 
 	}
 	
 	for (int i = 0; i < N - 1; i++)
@@ -65,7 +47,7 @@ int main()
 		}
 	}
 	
-	printf("Array 1\n");
+	printf("Original Array 1\n");
 	for (int i = 0; i < N; i++)
 	{
 		printf("%d: ", i);
@@ -76,7 +58,7 @@ int main()
 	
 	printf("\n\n");
 	
-	printf("Array 2\n");
+	printf("Sorted Array 2\n");
 	for (int i = 0; i < N; i++)
 	{
 		printf("%d: ", i);
