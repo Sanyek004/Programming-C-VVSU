@@ -26,6 +26,8 @@ int main ()
 			if (value >= after)
 			{
 				printf("Founded: %s\n", words);	
+				fprintf(output_file,words);
+				
 			}
 		}
 	}
