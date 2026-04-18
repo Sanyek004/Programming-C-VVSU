@@ -14,7 +14,7 @@ int main ()
 		return -1;
 	}
 	
-	char words[100];
+	char words[256];
 	int after = 1980;
 	
 	while (fgets(words,sizeof(words),open_file) != NULL)
