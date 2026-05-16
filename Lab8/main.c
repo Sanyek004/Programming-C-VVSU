@@ -6,6 +6,9 @@
 #define MAX_LINES 100
 #define MAX_LENGTH 255
 
+int sort_keys[5];   
+int sort_keys_count = 0;
+
 typedef struct {		
 	char lastname[64];
 	char name[64];
@@ -69,6 +72,21 @@ int compare_by_height(const void *a, const void *b) {
 	return (personA->height - personB->height);
 }
 
+int compare_multi(const void *a, const void *b) {
+
+    for (int i = 0; i < sort_keys_count; i++) {
+        int result = 0;
+        switch (sort_keys[i]) {
+            case 1: result = compare_by_name(a, b);     break;
+            case 2: result = compare_by_lastname(a, b); break;
+            case 3: result = compare_by_year(a, b);     break;
+            case 4: result = compare_by_sex(a, b);      break;
+            case 5: result = compare_by_height(a, b);   break;
+        }
+        if (result != 0) return result; // нашли различие — возвращаем
+    }
+    return 0; // все критерии равны
+}
 
 int main ()
 {
@@ -111,45 +129,29 @@ int main ()
 	}	
 	
 	printf("\nВсего загружено людей: %d\n\n",line_count);	
-
-	int input = 0;
-	while (input < 1 || input > 5)
-	{
-		printf("\nВведите номер по которому хотите упорядочить данные:\n 1 - Имя\n 2 - Фамилия\n 3 - Год\n 4 - Пол\n 5 - Рост\n");
-		// Проверка: успешно ли считано число (защита от ввода букв)
-		if (scanf("%d", &input) != 1) {
-			printf("Ошибка! Вводите только цифры.\n");
-			while (getchar() != '\n'); // Очистка буфера ввода
-			continue;
-		}
 		
-		switch (input)
-		{
-			case 1:
-			qsort(people, line_count, sizeof(Person), compare_by_name);
-			break;
-			
-			case 2:
-			qsort(people, line_count, sizeof(Person), compare_by_lastname);
-			break;
-			
-			case 3:
-			qsort(people, line_count, sizeof(Person), compare_by_year);
-			break;
-			
-			case 4:
-			qsort(people, line_count, sizeof(Person), compare_by_sex);
-			break;
-			
-			case 5:
-			qsort(people, line_count, sizeof(Person), compare_by_height);
-			break;
-			
-			default:
-			printf("Ошибка! Не та цифра!\n");
-			scanf("%d",&input);
+	printf("\nВведите номера критериев сортировки через пробел (например: 2 3 5)\n");
+	printf(" 1 - Имя\n 2 - Фамилия\n 3 - Год\n 4 - Пол\n 5 - Рост\n> ");
+
+	char line[64];
+	fgets(line, sizeof(line), stdin);
+
+	// Парсим числа из строки
+	char *token = strtok(line, " \t\n");
+	while (token != NULL && sort_keys_count < 5) {
+		int key = atoi(token);
+		if (key >= 1 && key <= 5) {
+			sort_keys[sort_keys_count++] = key;
 		}
+		token = strtok(NULL, " \t\n");
 	}
+
+	if (sort_keys_count == 0) {
+		printf("Не введено ни одного корректного критерия!\n");
+		return -1;
+	}
+
+	qsort(people, line_count, sizeof(Person), compare_multi);
 		
 	// Выводим отсортированный массив людей
 	printf("Sorted People:\n");
