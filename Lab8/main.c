@@ -14,7 +14,7 @@ typedef struct {
 	int height;
 } Person;
 
-// Функция для сравнение двух людей по году рождения
+// Функция-компаратор для сравнение двух людей по году рождения
 int compare_by_year(const void *a, const void *b) {
 	
 	// Берём два объекта из структуры Person для сравнения
@@ -25,7 +25,7 @@ int compare_by_year(const void *a, const void *b) {
 	return (personA->birth_year - personB->birth_year);
 }
 
-// Функция для сравнение двух людей по имени
+// Функция-компаратор для сравнение двух людей по имени
 int compare_by_name(const void *a, const void *b) {
 	
 	// Берём два объекта из структуры Person для сравнения
@@ -34,6 +34,17 @@ int compare_by_name(const void *a, const void *b) {
 	
 	// Сравниваем в компараторе по имени
 	return strcmp(personA->name,personB->name);
+}
+
+// Функция-компаратор для сравнение двух людей по фамилии
+int compare_by_lastname(const void *a, const void *b) {
+	
+	// Берём два объекта из структуры Person для сравнения
+	Person *personA = (Person *)a;
+	Person *personB  = (Person *)b;
+	
+	// Сравниваем в компараторе по фамилии
+	return strcmp(personA->lastname,personB->lastname);
 }
 
 int main ()
@@ -79,7 +90,7 @@ int main ()
 	printf("\nВсего загружено людей: %d\n",line_count);	
 	
 	// Сортируем массив людей
-	qsort(people, line_count, sizeof(Person), compare_by_name);
+	qsort(people, line_count, sizeof(Person), compare_by_lastname);
 	
 	// Выводим отсортированный массив людей
 	printf("Sorted People:\n");
