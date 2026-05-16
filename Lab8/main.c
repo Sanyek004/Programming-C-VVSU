@@ -47,6 +47,17 @@ int compare_by_lastname(const void *a, const void *b) {
 	return strcmp(personA->lastname,personB->lastname);
 }
 
+// Функция-компаратор для сравнение двух людей по полу
+int compare_by_sex(const void *a, const void *b) {
+	
+	// Берём два объекта из структуры Person для сравнения
+	Person *personA = (Person *)a;
+	Person *personB  = (Person *)b;
+	
+	// Сравниваем в компараторе по полу (М -> Ж)
+	return strcmp(personB->sex,personA->sex);
+}
+
 int main ()
 {
 	FILE *open_file = fopen("main.txt","r");
@@ -90,7 +101,7 @@ int main ()
 	printf("\nВсего загружено людей: %d\n",line_count);	
 	
 	// Сортируем массив людей
-	qsort(people, line_count, sizeof(Person), compare_by_lastname);
+	qsort(people, line_count, sizeof(Person), compare_by_sex);
 	
 	// Выводим отсортированный массив людей
 	printf("Sorted People:\n");
